@@ -6,11 +6,12 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     features = "src/test/resources/features",
     glue = {"com.qaportfolio.stepdefinitions"},
-    tags = "@smoke",
+    tags = "@smoke or @regression",
     plugin = {
         "pretty",
         "html:target/cucumber-reports/cucumber.html",
-        "json:target/cucumber-reports/cucumber.json"
+        "json:target/cucumber-reports/cucumber.json",
+        "rerun:target/failedTests.txt"
     },
     monochrome = true
 )

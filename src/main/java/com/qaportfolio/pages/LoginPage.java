@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
 
 public class LoginPage {
 
@@ -22,6 +22,8 @@ public class LoginPage {
     @FindBy(xpath = "//p[@class='error']")
     private WebElement errorMessage;
 
+    @FindBy(xpath = "//a[text()='Register']")
+    private WebElement registerLinkButton;
 
     public LoginPage() {
         PageFactory.initElements(DriverManager.getDriver(), this);
@@ -47,9 +49,27 @@ public class LoginPage {
         clickLoginButton();
     }
 
- public String getErrorMessage() {
-        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
+    public String getErrorMessage() {
+        WebDriverWait wait = new WebDriverWait(
+            DriverManager.getDriver(), Duration.ofSeconds(10)
+        );
         wait.until(ExpectedConditions.visibilityOf(errorMessage));
         return errorMessage.getText();
+    }
+
+    public void clickRegisterLink() {
+        registerLinkButton.click();
+    }
+
+    public boolean isRegisterLinkVisible() {
+        WebDriverWait wait = new WebDriverWait(
+            DriverManager.getDriver(), Duration.ofSeconds(10)
+        );
+        wait.until(ExpectedConditions.visibilityOf(registerLinkButton));
+        return registerLinkButton.isDisplayed();
+    }
+
+    public String getCurrentUrl() {
+        return DriverManager.getDriver().getCurrentUrl();
     }
 }
