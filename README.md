@@ -5,8 +5,6 @@ A hybrid BDD automation framework for testing the Parabank banking application. 
 
 Live application under test: https://parabank.parasoft.com/parabank/index.htm
 
----
-
 ## Why this project
 
 I built this framework to demonstrate enterprise level test automation patterns including scenario level state isolation, externalized configuration, and data driven test generation. It tests real production flows on the Parabank demo banking application including authentication, form validation, and registration.
@@ -49,8 +47,6 @@ The framework follows separation of concerns with four core layers.
 
 **Runners layer.** TestNG entry points for Cucumber execution. TestRunner for full suite, ReRunner for failed tests only.
 
----
-
 ## Key design patterns
 
 **Page Object Model.** Each page is a class with locators and actions, keeping test logic separate from UI implementation.
@@ -63,7 +59,7 @@ The framework follows separation of concerns with four core layers.
 
 **Hooks lifecycle.** Hook class uses Before and After annotations to ensure scenario isolation by clearing cookies, capturing screenshots on failure, and quitting the driver. Prevents test pollution and guarantees reliable results regardless of execution order.
 
----
+
 
 ## Test coverage
 
@@ -75,12 +71,8 @@ The framework follows separation of concerns with four core layers.
 
 **Tags.** `@smoke` for critical paths, `@regression` for full coverage.
 
----
 
 ## Project structure
-
-<details>
-<summary>Expand to view folder structure</summary>
 
 ```
 src/main/java/com/qaportfolio
@@ -109,7 +101,6 @@ src/test/resources/features
 ├── login.feature
 └── register.feature
 ```
-</details>
 
 ---
 
