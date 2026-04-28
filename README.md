@@ -1,11 +1,11 @@
 
-
-```markdown
 # Parabank Selenium Java TestNG Cucumber Framework
 
 A hybrid BDD automation framework for testing the Parabank banking application. Built with Selenium 4, TestNG, Cucumber, and the Page Object Model pattern.
 
 Live application under test: https://parabank.parasoft.com/parabank/index.htm
+
+---
 
 ## Why this project
 
@@ -49,6 +49,8 @@ The framework follows separation of concerns with four core layers.
 
 **Runners layer.** TestNG entry points for Cucumber execution. TestRunner for full suite, ReRunner for failed tests only.
 
+---
+
 ## Key design patterns
 
 **Page Object Model.** Each page is a class with locators and actions, keeping test logic separate from UI implementation.
@@ -61,6 +63,8 @@ The framework follows separation of concerns with four core layers.
 
 **Hooks lifecycle.** Hook class uses Before and After annotations to ensure scenario isolation by clearing cookies, capturing screenshots on failure, and quitting the driver. Prevents test pollution and guarantees reliable results regardless of execution order.
 
+---
+
 ## Test coverage
 
 9 scenarios across 2 feature files.
@@ -71,7 +75,12 @@ The framework follows separation of concerns with four core layers.
 
 **Tags.** `@smoke` for critical paths, `@regression` for full coverage.
 
+---
+
 ## Project structure
+
+<details>
+<summary>Expand to view folder structure</summary>
 
 ```
 src/main/java/com/qaportfolio
@@ -100,6 +109,9 @@ src/test/resources/features
 ├── login.feature
 └── register.feature
 ```
+</details>
+
+---
 
 ## How to run
 
@@ -182,3 +194,9 @@ Nara Bayaraa — QA Automation Engineer based in Chicago, IL
 ## License
 
 This project is for portfolio and educational purposes.
+
+---
+
+**Happy Testing! 🚀**
+
+---
