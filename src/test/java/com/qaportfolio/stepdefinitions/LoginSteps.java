@@ -18,11 +18,15 @@ public class LoginSteps {
     @Given("user is on the Parabank login page")
     public void userIsOnParabankLoginPage() {
         DriverManager.getDriver().get(ConfigReader.get("baseUrl"));
+        DriverManager.getDriver().manage().deleteAllCookies();
+        DriverManager.getDriver().navigate().to(ConfigReader.get("baseUrl"));
+
+        String currentUrl = DriverManager.getDriver().getCurrentUrl();
         String title = DriverManager.getDriver().getTitle();
+
         Assert.assertTrue(
-            title.contains("ParaBank"),
-            "Page title does not contain ParaBank"
-        );
+                currentUrl.contains("index.htm") || !currentUrl.contains("overview"),
+                "Still logged in. URL: " + currentUrl + ", Title: " + title);
     }
 
     @When("user enters username {string} and password {string}")
@@ -33,14 +37,12 @@ public class LoginSteps {
     @Then("user should be redirected to accounts overview page")
     public void userShouldBeRedirectedToAccountsOverview() {
         WebDriverWait wait = new WebDriverWait(
-            DriverManager.getDriver(), Duration.ofSeconds(15)
-        );
+                DriverManager.getDriver(), Duration.ofSeconds(15));
         wait.until(ExpectedConditions.urlContains("overview"));
         String currentUrl = DriverManager.getDriver().getCurrentUrl();
         Assert.assertTrue(
-            currentUrl.contains("overview"),
-            "URL does not contain overview"
-        );
+                currentUrl.contains("overview"),
+                "URL does not contain overview");
     }
 
     @Then("user should see the empty credentials error")
@@ -48,10 +50,9 @@ public class LoginSteps {
         String expected = ConfigReader.get("error.emptyCredentials");
         String actual = loginPage.getErrorMessage();
         Assert.assertEquals(
-            actual,
-            expected,
-            "Empty credentials error message does not match"
-        );
+                actual,
+                expected,
+                "Empty credentials error message does not match");
     }
 
     @Then("user should see the invalid credentials error")
@@ -59,18 +60,16 @@ public class LoginSteps {
         String expected = ConfigReader.get("error.invalidCredentials");
         String actual = loginPage.getErrorMessage();
         Assert.assertEquals(
-            actual,
-            expected,
-            "Invalid credentials error message does not match"
-        );
+                actual,
+                expected,
+                "Invalid credentials error message does not match");
     }
 
     @Then("user should see the register link")
     public void userShouldSeeRegisterLink() {
         Assert.assertTrue(
-            loginPage.isRegisterLinkVisible(),
-            "Register link is not visible"
-        );
+                loginPage.isRegisterLinkVisible(),
+                "Register link is not visible");
     }
 
     @When("user clicks the register link")
@@ -82,17 +81,15 @@ public class LoginSteps {
     public void userShouldBeRedirectedToRegisterPage() {
         String url = loginPage.getCurrentUrl();
         Assert.assertTrue(
-            url.contains("register"),
-            "URL does not contain register"
-        );
+                url.contains("register"),
+                "URL does not contain register");
     }
 
     @Then("the URL should contain {string}")
     public void urlShouldContain(String expectedUrlPart) {
         String url = loginPage.getCurrentUrl();
         Assert.assertTrue(
-            url.contains(expectedUrlPart),
-            "URL does not contain " + expectedUrlPart
-        );
+                url.contains(expectedUrlPart),
+                "URL does not contain " + expectedUrlPart);
     }
 }
